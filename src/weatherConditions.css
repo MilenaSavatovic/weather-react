@@ -1,0 +1,15 @@
+.first p {
+  border-bottom: 1px solid gray;
+  margin-bottom: 20px;
+}
+
+.first span {
+  font-weight: bold;
+}
+.days {
+  margin-bottom: 100px;
+}
+
+.weather-conditions {
+  color: #ec6e4c;
+}
