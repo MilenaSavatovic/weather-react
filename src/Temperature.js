@@ -1,18 +1,18 @@
 import React from 'react'
 import './temperature.css'
 
-export default function Temperature() {
+export default function Temperature(props) {
   return (
     <div>
       <div className="clearfix weather-temperature">
-        <i className="fas fa-sun float-left" alt="Clear" id="icon"></i>
-        {/* <img src="" alt="Clear" id="icon" className="float-left" /> */}
+        <img src={props.icon} alt="Clear" className="float-left" />
+
         <span className="float-left data">
-          <strong id="temperature">15</strong>
+          <strong> {props.temperature}</strong>
           <span className="units">°C</span>
         </span>
       </div>
-      <p className="weather">Clear sky</p>
+      <p className="weather">{props.description}</p>
     </div>
   )
 }

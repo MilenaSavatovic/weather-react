@@ -1,16 +1,16 @@
 import React from 'react'
 import './location.css'
 
-export default function Location() {
+export default function Location(props) {
   return (
     <section>
       <div className="location">
-        <strong id="city">Novi Sad </strong>
-        <strong id="country">Serbia</strong>
+        <strong>{props.city} </strong>
+        <strong>{props.country}</strong>
       </div>
       <div>
         Last updated:
-        <span id="time"> 10:06</span>
+        <span> 10:06</span>
       </div>
     </section>
   )
