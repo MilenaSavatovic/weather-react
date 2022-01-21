@@ -7,6 +7,13 @@ function App() {
     <div className="App">
       <div className="container">
         <Weather />
+        <p>
+          {' '}
+          <a href="https://github.com/MilenaSavatovic/weather-react">
+            Open cource code
+          </a>{' '}
+          by Milena Savatovic
+        </p>
       </div>
     </div>
   )
