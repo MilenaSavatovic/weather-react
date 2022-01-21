@@ -14,7 +14,7 @@ export default function Weather() {
     humidity: 10,
     icon: `http://openweathermap.org/img/wn/01d@2x.png`,
     description: 'Clear sky',
-    country: 'France',
+    country: 'FR',
   })
 
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3a94f3778290bfeee61278505dbbe51d&units=metric`
@@ -44,12 +44,7 @@ export default function Weather() {
     <div className="weather-wrapper">
       <div className="input-field">
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Search"
-            required
-            onChange={updateCity}
-          />
+          <input type="text" placeholder="Search" onChange={updateCity} />
           <input type="submit" value="🔍" className="submit" />
           <button>
             <img
