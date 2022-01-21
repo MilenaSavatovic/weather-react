@@ -9,7 +9,11 @@ function App() {
         <Weather />
         <p>
           {' '}
-          <a href="https://github.com/MilenaSavatovic/weather-react">
+          <a
+            href="https://github.com/MilenaSavatovic/weather-react"
+            target="_blank"
+            rel="noreferrer"
+          >
             Open cource code
           </a>{' '}
           by Milena Savatovic
