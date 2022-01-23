@@ -6,33 +6,31 @@ import Location from './Location'
 import WeatherConditions from './WeatherConditions'
 import Temperature from './Temperature'
 
-export default function Weather() {
-  const [city, setCity] = useState('Paris')
-  const [weather, setWeather] = useState({
-    temperature: 10,
-    wind: 2,
-    humidity: 10,
-    icon: `http://openweathermap.org/img/wn/01d@2x.png`,
-    description: 'Clear sky',
-    country: 'FR',
-  })
-
-  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3a94f3778290bfeee61278505dbbe51d&units=metric`
+export default function Weather(props) {
+  const [city, setCity] = useState(props.defaultCity)
+  const [weather, setWeather] = useState({ ready: false })
 
   function showTemperature(response) {
     setWeather({
+      ready: true,
       temperature: Math.round(response.data.main.temp),
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       description: response.data.weather[0].description,
       country: response.data.sys.country,
+      date: new Date(response.data.dt * 1000),
     })
+  }
+
+  function search() {
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3a94f3778290bfeee61278505dbbe51d&units=metric`
+    axios.get(url).then(showTemperature)
   }
 
   function handleSubmit(event) {
     event.preventDefault()
-    axios.get(url).then(showTemperature)
+    search()
   }
 
   function updateCity(event) {
@@ -40,34 +38,42 @@ export default function Weather() {
     setCity(event.target.value)
   }
 
-  return (
-    <div className="weather-wrapper">
-      <div className="input-field">
-        <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Search" onChange={updateCity} />
-          <input type="submit" value="🔍" className="submit" />
-          <button>
-            <img
-              src={my_location_black_24dp}
-              alt="my location"
-              className="location-icon"
+  if (weather.ready) {
+    return (
+      <div className="weather-wrapper">
+        <div className="input-field">
+          <form onSubmit={handleSubmit}>
+            <input type="text" placeholder="Search" onChange={updateCity} />
+            <input type="submit" value="🔍" className="submit" />
+            <button>
+              <img
+                src={my_location_black_24dp}
+                alt="my location"
+                className="location-icon"
+              />
+            </button>
+          </form>
+        </div>
+        <Location city={city} country={weather.country} date={weather.date} />
+        <div className="row">
+          <div className="col-sm-6">
+            <Temperature
+              temperature={weather.temperature}
+              description={weather.description}
+              icon={weather.icon}
             />
-          </button>
-        </form>
-      </div>
-      <Location city={city} country={weather.country} />
-      <div className="row">
-        <div className="col-sm-6">
-          <Temperature
-            temperature={weather.temperature}
-            description={weather.description}
-            icon={weather.icon}
-          />
-        </div>
-        <div className="col-sm-6">
-          <WeatherConditions humidity={weather.humidity} wind={weather.wind} />
+          </div>
+          <div className="col-sm-6">
+            <WeatherConditions
+              humidity={weather.humidity}
+              wind={weather.wind}
+            />
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  } else {
+    search()
+    return 'Loading'
+  }
 }
