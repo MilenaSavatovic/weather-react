@@ -2,12 +2,6 @@ p {
   margin-bottom: 0;
 }
 
-.weather-temperature i {
-  margin-right: 5px;
-  font-size: 40px;
-  color: #ec6e4c;
-}
-
 .weather-temperature strong {
   color: #2b2b28;
   font-size: 64px;
@@ -22,21 +16,13 @@ p {
 }
 
 .weather-temperature .active {
-  color: #2b2b28;
+  color: #ec6e4c;
   cursor: default;
-}
-
-.weather-temperature .active:hover {
   text-decoration: none;
 }
 
-.weather {
-  color: #2b2b28;
-  text-align: left;
-  font-weight: bold;
-  margin-top: 20px;
-  font-size: 16px;
-  text-transform: capitalize;
+.weather-temperature .active:hover {
+  text-decoration: underline;
 }
 
 .data {

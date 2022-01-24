@@ -13,7 +13,7 @@ export default function Weather(props) {
   function showTemperature(response) {
     setWeather({
       ready: true,
-      temperature: Math.round(response.data.main.temp),
+      temperature: response.data.main.temp,
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
@@ -57,11 +57,12 @@ export default function Weather(props) {
         <Location city={city} country={weather.country} date={weather.date} />
         <div className="row">
           <div className="col-sm-6">
-            <Temperature
-              temperature={weather.temperature}
-              description={weather.description}
-              icon={weather.icon}
-            />
+            <div className="clearfix weather-temperature">
+              <img src={weather.icon} alt="Clear" className="float-left" />
+
+              <Temperature temperature={weather.temperature} />
+            </div>
+            <p className="weather">{weather.description}</p>
           </div>
           <div className="col-sm-6">
             <WeatherConditions

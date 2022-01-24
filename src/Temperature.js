@@ -1,18 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './temperature.css'
 
 export default function Temperature(props) {
-  return (
-    <div>
-      <div className="clearfix weather-temperature">
-        <img src={props.icon} alt="Clear" className="float-left" />
+  const [unit, setUnit] = useState('celsius')
 
-        <span className="float-left data">
-          <strong> {props.temperature}</strong>
-          <span className="units">°C</span>
+  function convertToFahrenheit(event) {
+    event.preventDefault()
+    setUnit('fahrenheit')
+  }
+
+  function showCelsius(event) {
+    event.preventDefault()
+    setUnit('celsius')
+  }
+
+  function fahrenheit() {
+    return (props.temperature * 9) / 5 + 32
+  }
+
+  if (unit === 'celsius') {
+    return (
+      <span className="float-left data">
+        <strong> {Math.round(props.temperature)}</strong>
+        <span className="units">
+          °C |{' '}
+          <a href="/" onClick={convertToFahrenheit} className="active">
+            °F
+          </a>
         </span>
-      </div>
-      <p className="weather">{props.description}</p>
-    </div>
-  )
+      </span>
+    )
+  } else {
+    return (
+      <span className="float-left data">
+        <strong> {Math.round(fahrenheit())}</strong>
+        <span className="units">
+          <a href="/" onClick={showCelsius} className="active">
+            °C
+          </a>
+          | °F
+        </span>
+      </span>
+    )
+  }
 }
