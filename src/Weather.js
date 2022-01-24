@@ -20,22 +20,24 @@ export default function Weather(props) {
       description: response.data.weather[0].description,
       country: response.data.sys.country,
       date: new Date(response.data.dt * 1000),
+      city: response.data.name,
     })
-  }
-
-  function search() {
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3a94f3778290bfeee61278505dbbe51d&units=metric`
-    axios.get(url).then(showTemperature)
   }
 
   function handleSubmit(event) {
     event.preventDefault()
+
     search()
   }
 
   function updateCity(event) {
     event.preventDefault()
     setCity(event.target.value)
+  }
+
+  function search() {
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3a94f3778290bfeee61278505dbbe51d&units=metric`
+    axios.get(url).then(showTemperature)
   }
 
   if (weather.ready) {
@@ -54,7 +56,11 @@ export default function Weather(props) {
             </button>
           </form>
         </div>
-        <Location city={city} country={weather.country} date={weather.date} />
+        <Location
+          city={weather.city}
+          country={weather.country}
+          date={weather.date}
+        />
         <div className="row">
           <div className="col-sm-6">
             <div className="clearfix weather-temperature">
