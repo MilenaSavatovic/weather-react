@@ -47,13 +47,13 @@ export default function Weather(props) {
           <form onSubmit={handleSubmit}>
             <input type="text" placeholder="Search" onChange={updateCity} />
             <input type="submit" value="🔍" className="submit" />
-            <button>
+            {/* <button>
               <img
                 src={my_location_black_24dp}
                 alt="my location"
                 className="location-icon"
               />
-            </button>
+            </button> */}
           </form>
         </div>
         <Location
