@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './Weather.css'
-import my_location_black_24dp from './my_location_black_24dp.svg'
 import axios from 'axios'
 import Location from './Location'
 import WeatherConditions from './WeatherConditions'
@@ -47,13 +46,6 @@ export default function Weather(props) {
           <form onSubmit={handleSubmit}>
             <input type="text" placeholder="Search" onChange={updateCity} />
             <input type="submit" value="🔍" className="submit" />
-            {/* <button>
-              <img
-                src={my_location_black_24dp}
-                alt="my location"
-                className="location-icon"
-              />
-            </button> */}
           </form>
         </div>
         <Location

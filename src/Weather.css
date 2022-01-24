@@ -31,15 +31,6 @@ button {
   text-align: left;
 }
 
-.location-icon {
-  opacity: 0.5;
-  font-size: 20px;
-}
-
-.location-icon:hover {
-  opacity: 1;
-}
-
 .input-field {
   text-align: center;
 }
