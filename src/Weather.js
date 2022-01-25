@@ -4,6 +4,7 @@ import axios from 'axios'
 import Location from './Location'
 import WeatherConditions from './WeatherConditions'
 import Temperature from './Temperature'
+import WeatherForecast from './WeatherForecast'
 
 export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity)
@@ -12,6 +13,7 @@ export default function Weather(props) {
   function showTemperature(response) {
     setWeather({
       ready: true,
+      coord: response.data.coord,
       temperature: response.data.main.temp,
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
@@ -69,6 +71,7 @@ export default function Weather(props) {
             />
           </div>
         </div>
+        <WeatherForecast coords={weather.coord} />
       </div>
     )
   } else {
