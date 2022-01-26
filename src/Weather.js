@@ -5,6 +5,7 @@ import Location from './Location'
 import WeatherConditions from './WeatherConditions'
 import Temperature from './Temperature'
 import WeatherForecast from './WeatherForecast'
+import WeatherIcon from './WeatherIcon'
 
 export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity)
@@ -17,7 +18,7 @@ export default function Weather(props) {
       temperature: response.data.main.temp,
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
-      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      icon: response.data.weather[0].icon,
       description: response.data.weather[0].description,
       country: response.data.sys.country,
       date: new Date(response.data.dt * 1000),
@@ -58,7 +59,10 @@ export default function Weather(props) {
         <div className="row">
           <div className="col-sm-6">
             <div className="clearfix weather-temperature">
-              <img src={weather.icon} alt="Clear" className="float-left" />
+              <WeatherIcon
+                icon={weather.icon}
+                description={weather.description}
+              />
 
               <Temperature temperature={weather.temperature} />
             </div>
